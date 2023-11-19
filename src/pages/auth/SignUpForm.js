@@ -44,24 +44,22 @@ const SignUpForm = () => {
   return (
     
     <Row className={styles.Row}>
-      {/* Welcome Message */}
-      <Container className={`${appStyles.ContentWithoutBackground} p-4 text-center`}>
-        <h2 className={styles.WelcomeMessage}>
-          Explore the Unseen, Discover the Dream
-        </h2>
-      </Container>
+      
       <Col className="my-auto py-2 p-md-2" md={6}>
         <Container className={`${appStyles.Content} p-4 `}>
           <h1 className={styles.Header}>sign up</h1>
 
             {/* add your form here */}
-            <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="username">
+    <Form onSubmit={handleSubmit}>
+       <Form.Group className="mb-3" controlId="username">
         <Form.Label className="d-none">Username</Form.Label>
-        <Form.Control className={styles.Input} type="text" placeholder="username" name="username" value={username} onChange={handleChange} />
-      </Form.Group>
-
-      {errors.username?.map((message, idx) => (
+        <Form.Control 
+        className={styles.Input} 
+        type="text" placeholder="username" 
+        name="username" value={username} 
+        onChange={handleChange} />
+       </Form.Group>
+       {errors.username?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
@@ -70,10 +68,15 @@ const SignUpForm = () => {
 
       <Form.Group className="mb-3" controlId="password1">
         <Form.Label className="d-none">Password</Form.Label>
-        <Form.Control className={styles.Input} type="password" placeholder="password" name="password1" value={password1} onChange={handleChange} />
-      </Form.Group>
-
-      {errors.password1?.map((message, idx) => (
+        <Form.Control 
+        className={styles.Input} 
+        type="password" 
+        placeholder="password" 
+        name="password1" 
+        value={password1} 
+        onChange={handleChange} />
+        </Form.Group>
+        {errors.password1?.map((message, idx) => (
               <Alert variant="warning" key={idx}>
                 {message}
               </Alert>
@@ -84,8 +87,6 @@ const SignUpForm = () => {
         <Form.Label className="d-none">Confirm Password</Form.Label>
         <Form.Control className={styles.Input} type="password" placeholder="confirm password" name="password2" value={password2} onChange={handleChange} />
       </Form.Group>
-
-
       {errors.password2?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
@@ -95,7 +96,6 @@ const SignUpForm = () => {
       <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit">
         Sign Up
       </Button>
-
       {errors.non_field_errors?.map((message, idx) => (
               <Alert key={idx} variant="warning" className="mt-3">
                 {message}
