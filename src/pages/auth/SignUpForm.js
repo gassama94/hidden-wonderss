@@ -122,8 +122,6 @@ const SignUpForm = () => {
                 {message}
               </Alert>
             ))}
-
-
       <Form.Group className="mb-3" controlId="password1">
         <Form.Label className="d-none">Password</Form.Label>
         <Form.Control 
@@ -139,18 +137,21 @@ const SignUpForm = () => {
                 {message}
               </Alert>
             ))}
-
-
       <Form.Group className="mb-3" controlId="password2">
         <Form.Label className="d-none">Confirm Password</Form.Label>
-        <Form.Control className={styles.Input} type="password" placeholder="confirm password" name="password2" value={password2} onChange={handleChange} />
+        <Form.Control 
+        className={styles.Input} 
+        type="password" 
+        placeholder="confirm password" 
+        name="password2" 
+        value={password2} 
+        onChange={handleChange} />
       </Form.Group>
       {errors.password2?.map((message, idx) => (
               <Alert key={idx} variant="warning">
                 {message}
               </Alert>
             ))}
-
       <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit" disabled={isLoading}>
         {isLoading ? 'Signing Up...' : 'Sign Up'}
         Sign Up
@@ -160,8 +161,6 @@ const SignUpForm = () => {
                 {message}
               </Alert>
             ))}
-
-
     </Form>
 
         </Container>
