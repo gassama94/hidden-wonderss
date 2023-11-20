@@ -19,6 +19,7 @@ const SignUpForm = () => {
   const { username, password1, password2 } = signUpData;
 
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);  // For loading feedback
 
   const history = useHistory();
 
@@ -58,18 +59,42 @@ const SignUpForm = () => {
     event.preventDefault();
 
     // Validate form before submission
+    // const formErrors = validateForm();
+    // if (Object.keys(formErrors).length > 0) {
+        // setErrors(formErrors);
+        // return; // Stop the form submission if errors are found
+    // }
+
+    // try {
+      // await axios.post("/dj-rest-auth/registration/", signUpData);
+      // history.push("/signin");
+    // } catch (err) {
+      // console.log(err.response);
+      // setErrors(err.response?.data);
+    // }
+  // };
+
+  setErrors({});  // Clear previous errors
     const formErrors = validateForm();
+
     if (Object.keys(formErrors).length > 0) {
-        setErrors(formErrors);
-        return; // Stop the form submission if errors are found
+      setErrors(formErrors);
+      return;
     }
 
+    setIsLoading(true);  // Start loading
+
     try {
-      await axios.post("/dj-rest-auth/registration/", signUpData);
+      await axios.post("/dj-rest-auth/registration/", JSON.stringify(signUpData), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      setIsLoading(false);  // Stop loading
       history.push("/signin");
     } catch (err) {
-      console.log(err.response);
-      setErrors(err.response?.data);
+      setIsLoading(false);  // Stop loading
+      setErrors(err.response?.data || { non_field_errors: ["An unexpected error occurred. Please try again."] });
     }
   };
 
@@ -126,7 +151,8 @@ const SignUpForm = () => {
               </Alert>
             ))}
 
-      <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit">
+      <Button className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`} type="submit" disabled={isLoading}>
+        {isLoading ? 'Signing Up...' : 'Sign Up'}
         Sign Up
       </Button>
       {errors.non_field_errors?.map((message, idx) => (
