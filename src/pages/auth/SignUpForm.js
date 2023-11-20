@@ -29,8 +29,41 @@ const SignUpForm = () => {
     });
   };
 
+  // Form validation
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Check if username is empty
+    if (!username.trim()) {
+      newErrors.username = ["Username is required"];
+    }
+
+    // Check if the password fields are empty
+    if (!password1) {
+      newErrors.password1 = ["Password is required"];
+    }
+    if (!password2) {
+      newErrors.password2 = ["Confirm password is required"];
+    }
+
+    // Check if passwords match
+    if (password1 && password2 && password1 !== password2) {
+      newErrors.password2 = ["Passwords do not match"];
+    }
+
+    return newErrors;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Validate form before submission
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+        setErrors(formErrors);
+        return; // Stop the form submission if errors are found
+    }
+
     try {
       await axios.post("/dj-rest-auth/registration/", signUpData);
       history.push("/signin");
