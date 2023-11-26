@@ -85,13 +85,9 @@ const SignUpForm = () => {
     setIsLoading(true);  // Start loading
 
     try {
-      await axios.post("/dj-rest-auth/registration/", JSON.stringify(signUpData), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      await axios.post("/dj-rest-auth/registration/", signUpData); 
+        history.push("/signin");
       setIsLoading(false);  // Stop loading
-      history.push("/signin");
     } catch (err) {
       setIsLoading(false);  // Stop loading
       setErrors(err.response?.data || { non_field_errors: ["An unexpected error occurred. Please try again."] });
@@ -113,8 +109,10 @@ const SignUpForm = () => {
         <Form.Label className="d-none">Username</Form.Label>
         <Form.Control 
         className={styles.Input} 
-        type="text" placeholder="username" 
-        name="username" value={username} 
+        type="text" 
+        placeholder="username" 
+        name="username" 
+        value={username} 
         onChange={handleChange} />
        </Form.Group>
        {errors.username?.map((message, idx) => (
