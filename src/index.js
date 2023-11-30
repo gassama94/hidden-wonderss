@@ -13,7 +13,6 @@ ReactDOM.render(
     <Router>
       <CurrentUserProvider>
         <ProfileDataProvider>
-
     <App />
         </ProfileDataProvider>
       </CurrentUserProvider>
