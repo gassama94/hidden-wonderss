@@ -7,12 +7,19 @@ import Profile from "./Profile";
 
 const PopularProfiles = ({ mobile }) => {
   const { popularProfiles } = useProfileData();
+  // Providing a default value for popularProfiles
+  //const { popularProfiles = { results: [] } } = useProfileData();
+
+  // Additional check to ensure popularProfiles.results is defined and not null
+  //const hasProfiles = popularProfiles.results && popularProfiles.results.length;
+
 
   return (
     <Container
       className={`${appStyles.Content} ${
         mobile && "d-lg-none text-center mb-3"
       }`}
+
     >
       {popularProfiles.results.length ? (
         <>
